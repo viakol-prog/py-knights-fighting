@@ -94,12 +94,9 @@ def battle(knights_config: dict) -> dict:
     knights = create_knights(knights_config, keys)
 
 # бої — після підготовки всіх лицарів
-    apply_damage(knights["lancelot"], knights["mordred"]["power"])
-    apply_damage(knights["mordred"], knights["lancelot"]["power"])
-    apply_damage(knights["arthur"], knights["red_knight"]["power"])
-    apply_damage(knights["red_knight"], knights["arthur"]["power"])
+    pairs = (("lancelot", "mordred"), ("arthur", "red_knight"))
+    for a_key, b_key in pairs:
+        apply_damage(knights[a_key], knights[b_key]["power"])
+        apply_damage(knights[b_key], knights[a_key]["power"])
 # повернення результатів (імʼя -> hp, hp не нижче 0)
-    return {k["name"]: max(k["hp"], 0) for k in knights.values()}
-
-
-print(battle(KNIGHTS))
+    return {k["name"]: k["hp"] for k in knights.values()}

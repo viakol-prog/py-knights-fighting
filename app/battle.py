@@ -1,5 +1,5 @@
 from app.utils import sum_protection, apply_weapon
-from utils import apply_potion
+from app.utils import apply_potion
 
 
 class Knight:

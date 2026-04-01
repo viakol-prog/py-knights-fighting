@@ -6,13 +6,13 @@ class Knight:
         self.name = config_dict.get("name")
         self.hp = config_dict.get("hp", 100)
         self.power = config_dict.get("power", 0)
-        self.protection = config_dict.get("protection", 0)
+        self.protection = 0
         self.weapon = config_dict.get("weapon")
         self.armour = config_dict.get("armour", [])
         self.potion = config_dict.get("potion")
         self._base_hp = self.hp
         self._base_power = self.power
-        self._base_protection = self.protection
+        self._base_protection = 0
         self._prepared = False
 
     def prepare(self) -> None:
