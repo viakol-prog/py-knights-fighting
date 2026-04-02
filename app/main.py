@@ -1,6 +1,3 @@
-from app.utils import create_knights
-from app.utils import apply_damage
-
 KNIGHTS = {
     "lancelot": {
         "name": "Lancelot",
@@ -90,13 +87,15 @@ KNIGHTS = {
 
 
 def battle(knights_config: dict) -> dict:
+    from app.utils import create_knights
     keys = ("lancelot", "mordred", "arthur", "red_knight")
     knights = create_knights(knights_config, keys)
 
 # бої — після підготовки всіх лицарів
     pairs = (("lancelot", "mordred"), ("arthur", "red_knight"))
     for a_key, b_key in pairs:
-        apply_damage(knights[a_key], knights[b_key]["power"])
-        apply_damage(knights[b_key], knights[a_key]["power"])
+        knights[a_key].take_damage(knights[b_key].power)
+        knights[b_key].take_damage(knights[a_key].power)
+
 # повернення результатів (імʼя -> hp, hp не нижче 0)
-    return {k["name"]: k["hp"] for k in knights.values()}
+    return {k.name: k.hp for k in knights.values()}
